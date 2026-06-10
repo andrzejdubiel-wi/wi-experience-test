@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WI Seller Insights | WebInterpret</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wi-blue: #0049C6;
+      --wi-blue-dark: #003399;
+      --wi-blue-light: #2B6FF5;
+      --wi-cyan: #00C2FF;
+      --wi-green: #00C48C;
+      --wi-orange: #FF6B35;
+      --wi-red: #E8304A;
+      --wi-yellow: #FFB800;
+      --wi-gray-50: #F8FAFF;
+      --wi-gray-100: #EEF2FB;
+      --wi-gray-200: #DDE3F0;
+      --wi-gray-400: #9AABC5;
+      --wi-gray-600: #5A6E8C;
+      --wi-gray-800: #1A2540;
+      --wi-text: #0D1B35;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0, 73, 198, 0.10);
+      --shadow-lg: 0 12px 48px rgba(0, 73, 198, 0.16);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--wi-gray-50);
+      color: var(--wi-text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--wi-gray-200);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--wi-blue) 0%, var(--wi-cyan) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-icon svg { width: 22px; height: 22px; fill: #fff; }
+    .nav-logo-text { font-weight: 700; font-size: 1.15rem; color: var(--wi-text); }
+    .nav-logo-text span { color: var(--wi-blue); }
+    .nav-badge {
+      background: var(--wi-blue);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--wi-blue-dark) 0%, var(--wi-blue) 55%, var(--wi-blue-light) 100%);
+      color: #fff;
+      padding: 72px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,194,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,196,140,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow span { width: 6px; height: 6px; background: var(--wi-cyan); border-radius: 50%; display: inline-block; }
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 em { font-style: normal; color: var(--wi-cyan); }
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    /* SEARCH BOX */
+    .search-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .search-box {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus-within { border-color: var(--wi-cyan); }
+    .search-icon {
+      display: flex;
+      align-items: center;
+      padding: 0 16px 0 20px;
+      color: var(--wi-gray-400);
+    }
+    #username-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--wi-text);
+      padding: 16px 0;
+      background: transparent;
+    }
+    #username-input::placeholder { color: var(--wi-gray-400); }
+    #analyze-btn {
+      background: linear-gradient(135deg, var(--wi-blue) 0%, var(--wi-blue-light) 100%);
+      color: #fff;
+      border: none;
+      padding: 0 28px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+      border-radius: 0 48px 48px 0;
+    }
+    #analyze-btn:hover { opacity: 0.9; transform: translateX(1px); }
+    #analyze-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .search-hint {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      opacity: 0.65;
+    }
+    .example-sellers {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .example-seller {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .example-seller:hover { background: rgba(255,255,255,0.25); }
+
+    /* MAIN */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* LOADING */
+    #loading {
+      display: none;
+      text-align: center;
+      padding: 60px 0;
+    }
+    .spinner {
+      width: 48px; height: 48px;
+      border: 4px solid var(--wi-gray-200);
+      border-top-color: var(--wi-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-step {
+      color: var(--wi-gray-600);
+      font-size: 0.95rem;
+    }
+    .loading-steps-list {
+      list-style: none;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .loading-steps-list li {
+      font-size: 0.85rem;
+      color: var(--wi-gray-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .loading-steps-list li.active { color: var(--wi-blue); font-weight: 500; }
+    .loading-steps-list li.done { color: var(--wi-green); }
+
+    /* ERROR */
+    #error-box {
+      display: none;
+      background: #FFF5F6;
+      border: 1px solid #FCCDD3;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .error-icon { font-size: 1.3rem; }
+    #error-msg { color: var(--wi-red); font-weight: 500; }
+
+    /* RESULTS */
+    #results { display: none; }
+
+    /* SELLER CARD */
+    .seller-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: start;
+    }
+    .seller-avatar {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--wi-blue) 0%, var(--wi-cyan) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .seller-info h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .seller-info h2 a { color: var(--wi-text); text-decoration: none; }
+    .seller-info h2 a:hover { color: var(--wi-blue); }
+    .seller-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--wi-gray-600);
+    }
+    .meta-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .seller-stats {
+      display: flex;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .stat-box {
+      text-align: center;
+      min-width: 80px;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--wi-blue);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--wi-gray-600);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+    .seller-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--wi-gray-100);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--wi-blue);
+      margin-top: 8px;
+    }
+    .seller-description {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--wi-gray-600);
+      font-style: italic;
+      border-left: 3px solid var(--wi-gray-200);
+      padding-left: 12px;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      margin-bottom: 20px;
+    }
+    .section-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--wi-text);
+    }
+    .section-header p {
+      font-size: 0.88rem;
+      color: var(--wi-gray-600);
+      margin-top: 2px;
+    }
+
+    /* SIGNAL GRID */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .signal-card {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--wi-gray-200);
+    }
+    .signal-card.positive { border-top-color: var(--wi-green); }
+    .signal-card.warning { border-top-color: var(--wi-yellow); }
+    .signal-card.danger { border-top-color: var(--wi-red); }
+    .signal-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--wi-gray-600);
+      margin-bottom: 6px;
+    }
+    .signal-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--wi-text);
+    }
+    .signal-sub {
+      font-size: 0.78rem;
+      color: var(--wi-gray-600);
+      margin-top: 3px;
+    }
+
+    /* CATEGORIES */
+    .categories-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+    .category-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .category-row:last-child { margin-bottom: 0; }
+    .category-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      min-width: 180px;
+      color: var(--wi-text);
+    }
+    .category-bar-wrap {
+      flex: 1;
+      background: var(--wi-gray-100);
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .category-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--wi-blue) 0%, var(--wi-cyan) 100%);
+      border-radius: 4px;
+      transition: width 0.8s ease;
+    }
+    .category-pct {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--wi-blue);
+      min-width: 36px;
+      text-align: right;
+    }
+
+    /* OPPORTUNITIES */
+    .opportunities-wrap { margin-bottom: 32px; }
+    .opp-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      overflow: hidden;
+      border-left: 4px solid var(--wi-gray-200);
+      transition: box-shadow 0.2s;
+    }
+    .opp-card:hover { box-shadow: var(--shadow-lg); }
+    .opp-card.severity-high { border-left-color: var(--wi-red); }
+    .opp-card.severity-medium { border-left-color: var(--wi-yellow); }
+    .opp-card.severity-low { border-left-color: var(--wi-green); }
+
+    .opp-header {
+      padding: 20px 24px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      cursor: pointer;
+    }
+    .severity-badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .severity-high .severity-badge { background: #FEE2E7; color: var(--wi-red); }
+    .severity-medium .severity-badge { background: #FFF8E1; color: #B07B00; }
+    .severity-low .severity-badge { background: #E3FAF3; color: #00875A; }
+
+    .opp-title-wrap { flex: 1; }
+    .opp-trigger {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--wi-gray-400);
+      margin-bottom: 4px;
+    }
+    .opp-feature {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--wi-text);
+    }
+    .opp-details {
+      font-size: 0.88rem;
+      color: var(--wi-gray-600);
+      margin-top: 4px;
+    }
+    .opp-revenue {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--wi-blue) 0%, var(--wi-blue-light) 100%);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      max-width: 160px;
+      line-height: 1.3;
+    }
+    .opp-revenue-label {
+      font-size: 0.65rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .opp-body {
+      display: none;
+      padding: 0 24px 20px;
+      border-top: 1px solid var(--wi-gray-100);
+    }
+    .opp-body.expanded { display: block; }
+    .opp-pitch {
+      background: var(--wi-gray-50);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: var(--wi-gray-800);
+      font-style: italic;
+      border-left: 3px solid var(--wi-blue);
+      margin-top: 14px;
+    }
+    .opp-logic {
+      margin-top: 12px;
+      font-size: 0.83rem;
+      color: var(--wi-gray-600);
+    }
+    .opp-logic strong { color: var(--wi-text); }
+    .expand-icon {
+      margin-left: auto;
+      color: var(--wi-gray-400);
+      transition: transform 0.25s;
+    }
+    .opp-card.open .expand-icon { transform: rotate(180deg); }
+
+    /* SUMMARY PANEL */
+    .summary-panel {
+      background: linear-gradient(135deg, var(--wi-blue-dark) 0%, var(--wi-blue) 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-panel::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(0,194,255,0.15) 0%, transparent 70%);
+    }
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .summary-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .summary-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .summary-header p { font-size: 0.85rem; opacity: 0.75; }
+    .summary-metrics {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .summary-metric { flex: 1; min-width: 120px; }
+    .summary-metric-val {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .summary-metric-val.high { color: var(--wi-cyan); }
+    .summary-metric-val.medium { color: var(--wi-yellow); }
+    .summary-metric-val.low { color: var(--wi-green); }
+    .summary-metric-label {
+      font-size: 0.78rem;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .summary-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+    .cta-bar {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .cta-bar p { font-size: 0.9rem; opacity: 0.85; }
+    .cta-btn {
+      background: #fff;
+      color: var(--wi-blue);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s;
+    }
+    .cta-btn:hover { transform: translateY(-1px); }
+
+    /* NO OPPS */
+    .no-opps {
+      text-align: center;
+      padding: 48px 24px;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .no-opps-icon { font-size: 3rem; margin-bottom: 12px; }
+    .no-opps h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .no-opps p { color: var(--wi-gray-600); font-size: 0.9rem; }
+
+    /* DEMO BANNER */
+    .demo-banner {
+      display: none;
+      background: linear-gradient(90deg, #FFF8E1 0%, #FFFDE7 100%);
+      border: 1px solid #FFE082;
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #6D4C00;
+    }
+    .demo-banner.visible { display: flex; }
+    .demo-banner strong { font-weight: 700; }
+
+    /* ERROR with suggestions */
+    .error-suggestions {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .try-demo-btn {
+      background: var(--wi-blue);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .try-demo-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      background: var(--wi-gray-800);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      margin-top: 40px;
+    }
+    footer a { color: var(--wi-cyan); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 48px 20px 60px; }
+      .seller-card { grid-template-columns: 1fr; }
+      .seller-stats { justify-content: flex-start; }
+      .summary-metrics { gap: 20px; }
+      .summary-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div>
+      <span class="nav-logo-text">Web<span>Interpret</span></span>
+    </div>
+  </a>
+  <span class="nav-badge">Seller Insights</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><span></span>eBay Seller Analysis Tool</div>
+  <h1>Discover the <em>Revenue Potential</em><br>for Any eBay Seller</h1>
+  <p>Enter an eBay username to instantly analyse their public profile, identify growth gaps, and see exactly how WebInterpret features can unlock new sales.</p>
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </span>
+      <input id="username-input" type="text" placeholder="Enter eBay username…" autocomplete="off" spellcheck="false" />
+      <button id="analyze-btn">Analyse Seller →</button>
+    </div>
+    <div class="search-hint">Try an example seller:</div>
+    <div class="example-sellers">
+      <span class="example-seller" onclick="tryExample('motorparts_pro')">motorparts_pro</span>
+      <span class="example-seller" onclick="tryExample('fashionhub_uk')">fashionhub_uk</span>
+      <span class="example-seller" onclick="tryExample('techdeal_store')">techdeal_store</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-step">Fetching seller data from eBay…</div>
+    <ul class="loading-steps-list" id="step-list">
+      <li id="step-1">📡 Fetching seller profile</li>
+      <li id="step-2">📦 Scanning listings & categories</li>
+      <li id="step-3">📊 Running WI opportunity analysis</li>
+    </ul>
+  </div>
+
+  <!-- DEMO BANNER -->
+  <div class="demo-banner" id="demo-banner">
+    <span>🧪</span>
+    <span><strong>Demo Mode</strong> — This is a pre-loaded example profile. Enter any real eBay username above to analyse live seller data.</span>
+  </div>
+
+  <!-- ERROR -->
+  <div id="error-box" style="display:none">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="error-icon">⚠️</span>
+        <span id="error-msg"></span>
+      </div>
+      <div class="error-suggestions" id="error-suggestions" style="display:none;margin-top:10px">
+        <button class="try-demo-btn" onclick="tryExample('motorparts_pro')">Try: motorparts_pro</button>
+        <button class="try-demo-btn" onclick="tryExample('fashionhub_uk')">Try: fashionhub_uk</button>
+        <button class="try-demo-btn" onclick="tryExample('techdeal_store')">Try: techdeal_store</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <!-- SELLER CARD -->
+    <div class="seller-card" id="seller-card">
+      <div class="seller-avatar" id="seller-avatar">?</div>
+      <div class="seller-info">
+        <h2><a id="seller-name-link" href="#" target="_blank" rel="noopener">–</a></h2>
+        <div class="seller-type-badge" id="seller-type">–</div>
+        <div class="seller-meta" id="seller-meta"></div>
+        <div class="seller-description" id="seller-desc" style="display:none"></div>
+      </div>
+      <div class="seller-stats" id="seller-stats"></div>
+    </div>
+
+    <!-- SIGNALS -->
+    <div class="section-header">
+      <h3>Key Seller Signals</h3>
+      <p>Public data points that drive the opportunity analysis below</p>
+    </div>
+    <div class="signals-grid" id="signals-grid"></div>
+
+    <!-- CATEGORIES -->
+    <div class="categories-card" id="categories-card" style="display:none">
+      <div class="section-header" style="margin-bottom:16px">
+        <h3>Top Listing Categories</h3>
+        <p>Distribution of seller's visible listings by category</p>
+      </div>
+      <div id="categories-list"></div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-panel" id="summary-panel" style="display:none">
+      <div class="summary-header">
+        <div class="summary-icon">
+          <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-6"/></svg>
+        </div>
+        <div>
+          <h3>WI Growth Opportunity Summary</h3>
+          <p id="summary-subtitle">Opportunities identified for this seller</p>
+        </div>
+      </div>
+      <div class="summary-metrics" id="summary-metrics"></div>
+      <div class="cta-bar">
+        <p>Ready to show this seller their exact revenue potential?</p>
+        <button class="cta-btn" onclick="window.open('https://webinterpret.com/en','_blank')">Talk to WebInterpret →</button>
+      </div>
+    </div>
+
+    <!-- OPPORTUNITIES -->
+    <div class="section-header">
+      <h3>Identified Opportunities</h3>
+      <p>Click any card to see the full pitch and business rationale</p>
+    </div>
+    <div class="opportunities-wrap" id="opp-list"></div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 <a href="https://webinterpret.com/en" target="_blank">WebInterpret</a>. Internal sales enablement tool. Data sourced from public eBay profiles.</p>
+</footer>
+
+<script>
+const API_BASE = '';
+
+function tryExample(name) {
+  document.getElementById('username-input').value = name;
+  analyze();
+}
+
+document.getElementById('analyze-btn').addEventListener('click', analyze);
+document.getElementById('username-input').addEventListener('keydown', e => { if (e.key === 'Enter') analyze(); });
+
+async function analyze() {
+  const username = document.getElementById('username-input').value.trim();
+  if (!username) return;
+
+  setLoading(true);
+  hideResults();
+  hideError();
+  document.getElementById('demo-banner').classList.remove('visible');
+
+  animateSteps();
+
+  try {
+    const res = await fetch(`${API_BASE}/api/analyze/${encodeURIComponent(username)}`);
+    const data = await res.json();
+    if (!res.ok) {
+      const err = new Error(data.error || 'Unknown error');
+      err.canDemo = data.canDemo;
+      throw err;
+    }
+    document.getElementById('demo-banner').classList.toggle('visible', !!data.isDemo);
+    renderResults(data);
+  } catch (err) {
+    showError(err.message, err.canDemo);
+  } finally {
+    setLoading(false);
+    clearStepAnimation();
+  }
+}
+
+function animateSteps() {
+  const steps = ['step-1', 'step-2', 'step-3'];
+  steps.forEach(s => {
+    const el = document.getElementById(s);
+    el.className = '';
+  });
+  let i = 0;
+  window._stepInterval = setInterval(() => {
+    if (i > 0) document.getElementById(steps[i-1]).className = 'done';
+    if (i < steps.length) document.getElementById(steps[i]).className = 'active';
+    i++;
+    if (i >= steps.length) clearInterval(window._stepInterval);
+  }, 1200);
+}
+function clearStepAnimation() {
+  clearInterval(window._stepInterval);
+  ['step-1','step-2','step-3'].forEach(s => {
+    document.getElementById(s).className = 'done';
+  });
+}
+
+function setLoading(show) {
+  document.getElementById('loading').style.display = show ? 'block' : 'none';
+  document.getElementById('analyze-btn').disabled = show;
+  document.getElementById('analyze-btn').textContent = show ? 'Analysing…' : 'Analyse Seller →';
+}
+function hideResults() { document.getElementById('results').style.display = 'none'; }
+function hideError() {
+  document.getElementById('error-box').style.display = 'none';
+  document.getElementById('error-suggestions').style.display = 'none';
+}
+function showError(msg, canDemo) {
+  const box = document.getElementById('error-box');
+  box.style.display = 'block';
+  document.getElementById('error-msg').textContent = msg;
+  if (canDemo) document.getElementById('error-suggestions').style.display = 'flex';
+}
+
+function renderResults(data) {
+  const { profile, listings, analysis } = data;
+  renderSellerCard(profile, listings);
+  renderSignals(profile, listings, analysis);
+  renderCategories(listings);
+  renderOpportunities(analysis);
+  renderSummary(analysis, profile);
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderSellerCard(p, l) {
+  const initials = (p.sellerName || p.username || '?').slice(0, 2).toUpperCase();
+  document.getElementById('seller-avatar').textContent = initials;
+
+  const link = document.getElementById('seller-name-link');
+  link.textContent = p.sellerName || p.username;
+  link.href = p.profileUrl;
+
+  document.getElementById('seller-type').textContent = '👤 ' + p.businessType;
+
+  const meta = document.getElementById('seller-meta');
+  meta.innerHTML = '';
+  const metaItems = [
+    p.location ? { icon: '📍', text: p.location } : null,
+    p.memberSince ? { icon: '📅', text: 'Member ' + p.memberSince } : null,
+    l.totalListings ? { icon: '📦', text: l.totalListings.toLocaleString() + ' listings' } : null,
+  ].filter(Boolean);
+  metaItems.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'meta-item';
+    el.innerHTML = `<span>${m.icon}</span> ${escHtml(m.text)}`;
+    meta.appendChild(el);
+  });
+
+  const statsDiv = document.getElementById('seller-stats');
+  statsDiv.innerHTML = '';
+  const stats = [
+    { val: p.feedbackScore ? p.feedbackScore.toLocaleString() : '–', label: 'Feedback Score' },
+    { val: p.positivePct ? p.positivePct.toFixed(1) + '%' : '–', label: 'Positive %' },
+  ];
+  stats.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'stat-box';
+    div.innerHTML = `<div class="stat-value">${s.val}</div><div class="stat-label">${s.label}</div>`;
+    statsDiv.appendChild(div);
+  });
+
+  const descEl = document.getElementById('seller-desc');
+  if (p.description) {
+    descEl.textContent = p.description;
+    descEl.style.display = 'block';
+  }
+}
+
+function renderSignals(p, l, analysis) {
+  const grid = document.getElementById('signals-grid');
+  grid.innerHTML = '';
+
+  const signals = [
+    {
+      label: 'Shipping Reach',
+      value: l.shipsWorldwide ? '🌍 International' : '🏠 Domestic Only',
+      sub: l.shipsWorldwide ? 'Ships internationally' : 'Missing global markets',
+      cls: l.shipsWorldwide ? 'positive' : 'danger',
+    },
+    {
+      label: 'Promoted Listings',
+      value: l.sponsoredPct + '%',
+      sub: 'of visible listings sponsored',
+      cls: l.sponsoredPct > 30 ? 'positive' : l.sponsoredPct > 10 ? 'warning' : 'danger',
+    },
+    {
+      label: 'Seller Category',
+      value: categoryLabel(analysis.category),
+      sub: 'Primary listing segment',
+      cls: '',
+    },
+    {
+      label: 'Feedback Quality',
+      value: p.positivePct ? p.positivePct.toFixed(1) + '%' : 'N/A',
+      sub: 'Positive feedback score',
+      cls: p.positivePct >= 98 ? 'positive' : p.positivePct >= 95 ? 'warning' : 'danger',
+    },
+    {
+      label: 'Opportunities Found',
+      value: analysis.opportunities.length,
+      sub: 'WI features applicable',
+      cls: analysis.opportunities.length > 0 ? 'warning' : 'positive',
+    },
+    {
+      label: 'High Priority',
+      value: analysis.opportunities.filter(o => o.severity === 'high').length,
+      sub: 'Critical gaps identified',
+      cls: analysis.opportunities.filter(o => o.severity === 'high').length > 0 ? 'danger' : 'positive',
+    },
+  ];
+
+  signals.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'signal-card ' + s.cls;
+    div.innerHTML = `
+      <div class="signal-label">${s.label}</div>
+      <div class="signal-value">${s.value}</div>
+      <div class="signal-sub">${s.sub}</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function categoryLabel(cat) {
+  return { moto: '🔧 Moto / Auto', fashion: '👗 Fashion', electronics: '💻 Electronics', general: '📦 General' }[cat] || '📦 General';
+}
+
+function renderCategories(l) {
+  const card = document.getElementById('categories-card');
+  const list = document.getElementById('categories-list');
+  list.innerHTML = '';
+  if (!l.topCategories || l.topCategories.length === 0) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  l.topCategories.forEach(cat => {
+    const row = document.createElement('div');
+    row.className = 'category-row';
+    row.innerHTML = `
+      <div class="category-name">${escHtml(cat.name || 'Other')}</div>
+      <div class="category-bar-wrap"><div class="category-bar" style="width:${cat.pct || 0}%"></div></div>
+      <div class="category-pct">${cat.pct || 0}%</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function renderSummary(analysis, profile) {
+  const panel = document.getElementById('summary-panel');
+  if (analysis.opportunities.length === 0) { panel.style.display = 'none'; return; }
+  panel.style.display = 'block';
+
+  const highCount = analysis.opportunities.filter(o => o.severity === 'high').length;
+  const medCount = analysis.opportunities.filter(o => o.severity === 'medium').length;
+  const lowCount = analysis.opportunities.filter(o => o.severity === 'low').length;
+
+  document.getElementById('summary-subtitle').textContent =
+    `${analysis.opportunities.length} opportunity${analysis.opportunities.length !== 1 ? 'ies' : 'y'} identified for ${profile.username}`;
+
+  const metrics = document.getElementById('summary-metrics');
+  metrics.innerHTML = `
+    <div class="summary-metric">
+      <div class="summary-metric-val high">${highCount}</div>
+      <div class="summary-metric-label">High Priority</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-metric">
+      <div class="summary-metric-val medium">${medCount}</div>
+      <div class="summary-metric-label">Medium Priority</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-metric">
+      <div class="summary-metric-val low">${lowCount}</div>
+      <div class="summary-metric-label">Low Priority</div>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-metric">
+      <div class="summary-metric-val" style="color:#fff">${analysis.opportunities.length}</div>
+      <div class="summary-metric-label">Total Opportunities</div>
+    </div>
+  `;
+}
+
+function renderOpportunities(analysis) {
+  const list = document.getElementById('opp-list');
+  list.innerHTML = '';
+
+  if (analysis.opportunities.length === 0) {
+    list.innerHTML = `
+      <div class="no-opps">
+        <div class="no-opps-icon">✅</div>
+        <h4>No obvious gaps detected</h4>
+        <p>This seller already exhibits strong signals across the monitored metrics. Consider a deeper conversation about advanced WI features.</p>
+      </div>`;
+    return;
+  }
+
+  analysis.opportunities.forEach((opp, i) => {
+    const card = document.createElement('div');
+    card.className = `opp-card severity-${opp.severity}`;
+    card.innerHTML = `
+      <div class="opp-header" onclick="toggleOpp(this)">
+        <span class="severity-badge">${opp.severity} priority</span>
+        <div class="opp-title-wrap">
+          <div class="opp-trigger">${escHtml(opp.trigger)}</div>
+          <div class="opp-feature">${escHtml(opp.feature)}</div>
+          <div class="opp-details">${escHtml(opp.details)}</div>
+        </div>
+        ${opp.estimatedRevenue ? `
+        <div class="opp-revenue">
+          <span class="opp-revenue-label">Estimated Impact</span>
+          ${escHtml(opp.estimatedRevenue)}
+        </div>` : ''}
+        <svg class="expand-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="opp-body" id="opp-body-${i}">
+        <div class="opp-pitch">"${escHtml(opp.pitch)}"</div>
+        <div class="opp-logic">
+          <strong>Business Logic:</strong> ${escHtml(opp.businessLogic)}
+        </div>
+        ${opp.categoryNuance ? `<div class="opp-logic" style="margin-top:8px"><strong>Category Context:</strong> ${escHtml(opp.categoryNuance)}</div>` : ''}
+        ${opp.impact ? `<div class="opp-logic" style="margin-top:8px"><strong>Quantitative Impact:</strong> ${escHtml(opp.impact)}</div>` : ''}
+      </div>
+    `;
+    list.appendChild(card);
+    // Auto-expand first high priority
+    if (opp.severity === 'high' && i === 0) {
+      card.classList.add('open');
+      card.querySelector('.opp-body').classList.add('expanded');
+    }
+  });
+}
+
+function toggleOpp(header) {
+  const card = header.closest('.opp-card');
+  const body = card.querySelector('.opp-body');
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+  body.classList.toggle('expanded', !isOpen);
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
