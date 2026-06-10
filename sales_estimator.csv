@@ -1,0 +1,44 @@
+Scraped Metric / Trigger,Category Nuance & Challenges,"Business Logic (The ""Why"")",WI Feature Match,Quantitative Impact (The Math),Report Output (The Pitch)
+"""Ships To"" Locations
+
+(Domestic Only)","Moto: High EU demand.
+
+Fashion: High universal demand.
+
+Electronics: High cross-border friction.",Restricting TAM (Total Addressable Market) limits growth. Manual translation for international markets is impossible at scale.,WI International (Localization & Translation),"Moto: +14% active (+ up to 28% passive).
+
+Fashion: +14% (Mid-market: +8%).
+
+Electronics: +13% (Mid-market: +6%).","""You don't ship to top international markets. By localizing your listings with Webinterpret, you could see an incremental €[X] in sales without manual translation work."""
+"Sponsored Item Tags
+
+(Low/No PLS Usage)","Moto: Highly competitive; top-of-search is required.
+
+Fashion/Tech: Price sensitive; need data-driven ad spend to protect low margins.",Relying strictly on organic search means losing high-intent buyers to competitors who are paying for placement.,WI Promoted Listings Standard (PLS),"Moto: +25% increase in active sales.
+
+Electronics: Up to +18% bundled uplift (Loc + PLS).
+
+General: +10% to 15% uplift.","""You aren't using Promoted Listings. You are missing out on €[X] by letting competitors outrank you. We automate PLS to secure top spots while protecting your margins."""
+"Shipping to EU
+
+(Ships Worldwide)","All Categories: Strict EU enforcement.
+
+Electronics/Toys: Highest risk for customs blocks.",Selling into the EU legally requires a registered Responsible Person and specific safety data. Non-compliance results in takedowns.,WI GPSR Compliance (Standalone or bundled),"Revenue Protection: Flag roughly 17% to 28% of their international volume (based on segment data) as ""Revenue at Risk.""","""You ship to the EU, but risk non-compliance with new GPSR laws. We act as your EU Responsible Person to protect €[X] of your revenue from customs blocks."""
+"Compatibility Table
+
+(Missing Fitment/K-Type)",Moto / Auto Parts Only. Heavy/bulky items mean returns are devastatingly expensive.,"Buyers search for parts by Make/Model/Year. If fitment data is missing, the item won't surface in search, and return rates will skyrocket.",WI Fitment Automation & Listing Enhancements,Conversion Protection: Prevents lost sales and organically reduces return rates. Pairs with the Moto +14% loc metric.,"""You are missing Fitment data on [X]% of your items. We automate your K-Type compatibility tables so mechanics know your part fits, organically slashing your costly return rate."""
+"Item Specifics
+
+(Missing MPN, OE/OEM, Brand)","Moto: Mechanics search exact OEMs.
+
+Lux Fashion: Authentication requires exact brand/model data.","In professional or luxury categories, buyers bypass broad keywords and search using exact manufacturer part numbers.",WI AI Listing Enhancements,Organic Visibility: Recaptures lost B2B and high-intent professional traffic.,"""Your listings lack OEM/MPN item specifics. We use AI to fill these gaps, making you visible to professional buyers searching for exact replacements."""
+"HTML Description
+
+(Missing Mobile Tags / Plain Text)","Fashion: Needs high-res imagery.
+
+Electronics: Needs clear technical specs.",Mobile accounts for >60% of eBay sales. Standard desktop HTML looks broken on mobile. Plain text misses cross-sell opportunities.,WI Listing Enhancements (Mobile optimization & Cross-sell widgets),Basket Size: +2% to +5% increase in Average Order Value (AOV) via smart cross-selling.,"""Your listing descriptions aren't mobile-optimized and lack cross-selling. We automatically upgrade your templates to drive mobile conversions and increase your basket size."""
+"Handling Time
+
+(> 1 Day)","Moto: Extreme urgency (mechanics need parts now).
+
+Electronics: Expectation of fast fulfillment.","Slow handling times strip sellers of ""eBay Premium"" badges and penalize their rank in the Cassini ""Best Match"" algorithm.",WI Promoted Listings (Compensatory),Compensatory ROI: Justifies the need for PLS to buy back the organic rank lost to slow shipping.,"""Your handling time pushes you down the organic search rankings. Let's enable automated Promoted Listings to buy back your top-of-page visibility."""
